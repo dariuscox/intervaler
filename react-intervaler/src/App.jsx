@@ -12,13 +12,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 class App extends Component {
   render() {
     return (      
-       <BrowserRouter>
+       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <div>
           <Navigation />
             <Switch>
              <Route path="/" component={Stopwatch} exact/>
              <Route path="/timer" component={Timer} exact/>
-             <Route path="/about" component={About}/>
+             <Route path="/about" component={About} exact/>
              <Route component={Error}/>
            </Switch>
         </div> 

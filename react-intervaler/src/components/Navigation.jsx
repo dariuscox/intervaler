@@ -9,12 +9,11 @@ const Navigation = () => {
     return (
        <div>
            <Navbar bg="dark" variant="dark" expand="lg">
-                <Navbar.Brand href="/">Stopwatch</Navbar.Brand>
+                <Navbar.Brand href="/intervaler/">Stopwatch</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
-                    <Nav.Link className="navlinks" href="/timer">Timer</Nav.Link>
-                    <Nav.Link className="navlinks" href="/about">About</Nav.Link>
+                    <Nav.Link className="navlinks" href="/intervaler/timer">Timer</Nav.Link>
                     </Nav>
                     <Form inline>
                     <FormControl type="text" placeholder="Search" className="mr-sm-2" />
