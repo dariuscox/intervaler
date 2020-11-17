@@ -18,13 +18,15 @@ const Stopwatch = () => {
   }
 
   useEffect(() => {
-    let interval = setInterval(() => {console.log('set_interval')}, 1000);
+    let interval = setInterval(() => {
+      console.log('set_interval');
+    }, 1000);
     if (isActive) {
       interval = setInterval(() => {
-        setSeconds(seconds => seconds + 1);
-        let newMinutes = Math.floor(seconds/60);
-        setMinutes(minutes => newMinutes);
-        setSecondsDisplayed(secondsDisplayed => seconds - (newMinutes*60));
+        setSeconds((seconds) => seconds + 1);
+        const newMinutes = Math.floor(seconds / 60);
+        setMinutes((minutes) => newMinutes);
+        setSecondsDisplayed((secondsDisplayed) => seconds - newMinutes * 60);
       }, 1000);
     } else if (!isActive && seconds !== 0) {
       clearInterval(interval);
@@ -35,13 +37,19 @@ const Stopwatch = () => {
   return (
     <div className="app">
       <div className="time">
-        {minutes}m {secondsDisplayed}s
+        {minutes}m{secondsDisplayed}s
       </div>
       <div className="row">
-        <button className={`button button-primary button-primary-${isActive ? 'active' : 'inactive'}`} onClick={toggle}>
+        <button
+          type="button"
+          className={`button button-primary button-primary-${
+            isActive ? 'active' : 'inactive'
+          }`}
+          onClick={toggle}
+        >
           {isActive ? 'Pause' : 'Start'}
         </button>
-        <button className="button" onClick={reset}>
+        <button type="button" className="button" onClick={reset}>
           Reset
         </button>
       </div>

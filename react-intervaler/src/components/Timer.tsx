@@ -24,30 +24,32 @@ const Timer = () => {
 
   function setTimer() {
     let timer = 0;
-    if (!minutesInput){ 
+    if (!minutesInput) {
       setMinutesInput(0);
     }
-    timer = (minutesInput*60) + secondsInput;
-    setSeconds(timer)
-    setMinutes(Math.floor(timer/60));
-    setSecondsDisplayed(secondsDisplayed => (timer - (minutesInput*60)));
-    console.log(minutes)
-    console.log(seconds)
-    console.log(timer)
+    timer = minutesInput * 60 + secondsInput;
+    setSeconds(timer);
+    setMinutes(Math.floor(timer / 60));
+    setSecondsDisplayed((secondsDisplayed) => timer - minutesInput * 60);
+    console.log(minutes);
+    console.log(seconds);
+    console.log(timer);
   }
 
   useEffect(() => {
-    let interval = setInterval(() => {console.log('set_interval')}, 1000);
+    let interval = setInterval(() => {
+      console.log('set_interval');
+    }, 1000);
     if (isActive) {
-      if (secondsDisplayed === 0 && seconds <0){
-        console.log(seconds)
-        reset()
+      if (secondsDisplayed === 0 && seconds < 0) {
+        console.log(seconds);
+        reset();
       }
       interval = setInterval(() => {
-        setSeconds(seconds => seconds - 1);
-        let newMinutes = Math.floor(seconds/60);
-        setMinutes(minutes => newMinutes);
-        setSecondsDisplayed(secondsDisplayed => seconds - (newMinutes*60));
+        setSeconds((seconds) => seconds - 1);
+        let newMinutes = Math.floor(seconds / 60);
+        setMinutes((minutes) => newMinutes);
+        setSecondsDisplayed((secondsDisplayed) => seconds - newMinutes * 60);
       }, 1000);
     } else if (!isActive && seconds !== 0) {
       clearInterval(interval);
@@ -61,29 +63,37 @@ const Timer = () => {
         <Form>
           <Row>
             <Col>
-              <Form.Control placeholder="Minutes" 
-              onChange={e => setMinutesInput( parseInt(e.target.value ))}
+              <Form.Control
+                placeholder="Minutes"
+                onChange={(e) => setMinutesInput(parseInt(e.target.value, 10))}
               />
             </Col>
             <Col>
-              <Form.Control placeholder="Seconds" 
-              onChange={e => setSecondsInput(parseInt( e.target.value ))}
+              <Form.Control
+                placeholder="Seconds"
+                onChange={(e) => setSecondsInput(parseInt(e.target.value, 10))}
               />
             </Col>
           </Row>
         </Form>
-        <button className="button" onClick={setTimer}>
-                Set Timer
+        <button type="button" className="button" onClick={setTimer}>
+          Set Timer
         </button>
       </div>
       <div className="time">
         {minutes}m {secondsDisplayed}s
       </div>
       <div className="row">
-        <button className={`button button-primary button-primary-${isActive ? 'active' : 'inactive'}`} onClick={toggle}>
+        <button
+          type="button"
+          className={`button button-primary button-primary-${
+            isActive ? 'active' : 'inactive'
+          }`}
+          onClick={toggle}
+        >
           {isActive ? 'Pause' : 'Start'}
         </button>
-        <button className="button" onClick={reset}>
+        <button type="button" className="button" onClick={reset}>
           Reset
         </button>
       </div>
